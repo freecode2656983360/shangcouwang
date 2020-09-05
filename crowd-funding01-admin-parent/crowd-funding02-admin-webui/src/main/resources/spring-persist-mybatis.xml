@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:property-placeholder
+		location="classpath:jdbc.properties" />
+	<!-- 配置数据源 -->
+
+
+	<bean id="dataSource"
+		class="com.alibaba.druid.pool.DruidDataSource"> <!-- 连接数据库的用户名 -->
+		<property name="username" value="${jdbc.user}" /> <!-- 连接数据库的密码 -->
+		<property name="password" value="${jdbc.password}" /> <!-- 目标数据库的 URL 地址 -->
+		<property name="url" value="${jdbc.url}" /> <!-- 数据库驱动全类名 -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+	</bean>
+	
+	
+	<!--sqlSessionFactoryBean -->
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 装配数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 指定 MyBatis 全局配置文件位置 -->
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+		<!-- 指定 Mapper 配置文件位置 -->
+		<property name="mapperLocations"
+			value="classpath:/mybatis/mapper/*.xml" />
+
+		<!-- 配置插件 -->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<props>
+							<!--配置数据库方言,告诉PageHelper当前使用的数据库 -->
+							<prop key="dialect">mysql</prop>
+							<!--配置页码的合理化修正 -->
+							<prop key="reasonable">true</prop>
+						</props>
+					</property>
+				</bean>
+			</array>
+		</property>
+
+	</bean>
+	<!--&lt;!&ndash;配置mappperScannerConfig来扫描Mapper接口所在的包&ndash;&gt; -->
+	<bean id="mapperScannerConfig"
+		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+			value="com.zs.crowdfunding.mapper" />
+	</bean>
+</beans>

@@ -1,0 +1,15 @@
+com\zs\crowdfunding\entity\MenuExample$GeneratedCriteria.class
+com\zs\crowdfunding\entity\RoleExample$GeneratedCriteria.class
+com\zs\crowdfunding\entity\RoleExample$Criteria.class
+com\zs\crowdfunding\entity\AdminExample$GeneratedCriteria.class
+com\zs\crowdfunding\entity\MenuExample$Criterion.class
+com\zs\crowdfunding\entity\Admin.class
+com\zs\crowdfunding\entity\MenuExample.class
+com\zs\crowdfunding\entity\Menu.class
+com\zs\crowdfunding\entity\MenuExample$Criteria.class
+com\zs\crowdfunding\entity\RoleExample$Criterion.class
+com\zs\crowdfunding\entity\Role.class
+com\zs\crowdfunding\entity\RoleExample.class
+com\zs\crowdfunding\entity\AdminExample$Criteria.class
+com\zs\crowdfunding\entity\AdminExample.class
+com\zs\crowdfunding\entity\AdminExample$Criterion.class
